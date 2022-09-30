@@ -9,7 +9,7 @@ import os,sys
 
 os.system('cls')
 sys.stdout.write("\x1b]2;Bled Generator | Genning Accounts | Bled V1\x07")
-os.system(f'mode con: cols=97 lines=23')
+os.system(f'mode con: cols=103 lines=25')
 
 def randstr(lenn):
     alpha = "abcdefghijklmnopqrstuvwxyz0123456789"
@@ -25,10 +25,18 @@ class generator:
         self.amount = 0
         self.requestsent = 0
 
-        print(f'Guided Gen {Fore.BLUE}|{Fore.RESET} github.com/xtoolss')
-        self.invite = input('Invite: ')
+        print(f'''
+       *          .       *        {Fore.BLUE}██████{Fore.RESET}╗{Fore.BLUE} ██{Fore.RESET}╗{Fore.BLUE}     ███████╗██████╗    {Fore.RESET}*     *    *     '   *      '
+            *       '       '      {Fore.BLUE}██{Fore.RESET}╔══{Fore.BLUE}██{Fore.RESET}╗{Fore.BLUE}██{Fore.RESET}║     {Fore.BLUE}██{Fore.RESET}╔════╝{Fore.BLUE}██{Fore.RESET}╔══{Fore.BLUE}██{Fore.RESET}╗           '    *   '   *
+              *      *       '     {Fore.BLUE}██████{Fore.RESET}╔╝{Fore.BLUE}██{Fore.RESET}║     {Fore.BLUE}█████{Fore.RESET}╗{Fore.BLUE}  ██{Fore.RESET}║{Fore.BLUE}  ██{Fore.RESET}║     *               *   ' 
+      *   '*         '      *    * {Fore.BLUE}██{Fore.RESET}╔══{Fore.BLUE}██{Fore.RESET}╗{Fore.BLUE}██{Fore.RESET}║     {Fore.BLUE}██{Fore.RESET}╔══╝ {Fore.BLUE} ██{Fore.RESET}║{Fore.BLUE}  ██{Fore.RESET}║      *         '  '  *  '   *
+      *    *     '         '       {Fore.BLUE}██████{Fore.RESET}╔╝{Fore.BLUE}███████{Fore.RESET}╗{Fore.BLUE}███████{Fore.RESET}╗{Fore.BLUE}██████{Fore.RESET}╔╝     *    *     '                
+   *       *    *     '   *    '   ╚═════╝ ╚══════╝╚══════╝╚═════╝   *    *     '          *
+               *    *     '         '  *     *    *    *     '         '  *     *                                                 
+        ''')
+        self.invite = input('               Invite: ')
+        print('               Sending ')
 
-        os.system('cls')
 
         def gen(self):
 
@@ -68,7 +76,6 @@ class generator:
 
                     r = session.post('https://www.guilded.gg/api/users?type=email', json=json)
                     cookie = r.cookies["hmac_signed_session"]
-                    print(f'Created Account | Email: {email} | Pass: {password} | Username: {self.name}')
          
 
                     session.headers = {"cookie": f"hmac_signed_session={cookie}"}
@@ -76,9 +83,6 @@ class generator:
 
                     accountinfo = open('utils/accounts.txt', 'a+')
                     accountinfo.write(f'{email}:{password}\n')
-
-                    cookie = open('utils/cookies.txt', 'a+')
-                    cookie.write(f'{cookie}\n')
 
                     self.amount += 1
 
@@ -90,10 +94,9 @@ class generator:
 
         while True:
 
-            for i in range(10000):
+            if threading.active_count() < 500:
 
                 threading.Thread(target = gen,args = [self]).start()
 
-        main(self)
 
 generator()
