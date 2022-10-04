@@ -67,12 +67,7 @@ class generator:
                     fullname = f"{firstname} {lastname}"
                     email = randstr(8) + '@gmail.com'
 
-                    json = {
-                        "name":self.name,
-                        "email":email,
-                        "password":password,
-                        "fullName":fullname
-                    }
+                    json = {"name":self.name,"email":email,"password":password,"fullName":fullname}
 
                     r = session.post('https://www.guilded.gg/api/users?type=email', json=json)
                     cookie = r.cookies["hmac_signed_session"]
